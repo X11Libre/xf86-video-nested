@@ -85,9 +85,6 @@ static Bool NestedCreateScreenResources(ScreenPtr pScreen);
 static void NestedShadowUpdate(ScreenPtr pScreen, shadowBufPtr pBuf);
 static Bool NestedCloseScreen(CLOSE_SCREEN_ARGS_DECL);
 
-static void NestedBlockHandler(pointer data, OSTimePtr wt, pointer LastSelectMask);
-static void NestedWakeupHandler(pointer data, int i, pointer LastSelectMask);
-
 int NestedValidateModes(ScrnInfoPtr pScrn);
 Bool NestedAddMode(ScrnInfoPtr pScrn, int width, int height);
 void NestedPrintPscreen(ScrnInfoPtr p);
@@ -534,13 +531,23 @@ NestedMouseTimer(OsTimerPtr timer, CARD32 time, pointer arg) {
 }
 
 static void
-NestedBlockHandler(pointer data, OSTimePtr wt, pointer LastSelectMask) {
+#if ABI_VIDEODRV_VERSION >= SET_ABI_VERSION(23, 0)
+NestedBlockHandler(void *data, void *wt)
+#else
+NestedBlockHandler(pointer data, OSTimePtr wt, pointer LastSelectMask)
+#endif
+{
     NestedClientPrivatePtr pNestedClient = data;
     NestedClientCheckEvents(pNestedClient);
 }
 
 static void
-NestedWakeupHandler(pointer data, int i, pointer LastSelectMask) {
+#if ABI_VIDEODRV_VERSION >= SET_ABI_VERSION(23, 0)
+NestedWakeupHandler(void *data, int i)
+#else
+NestedWakeupHandler(pointer data, int i, pointer LastSelectMask)
+#endif
+{
 }
 
 /* Called at each server generation */

@@ -443,7 +443,7 @@ NestedValidateModes(ScrnInfoPtr pScrn) {
 
     pScrn->modePool = NULL;
 
-    /* Now set virtualX, virtualY, displayWidth and virtualFrom */
+    /* Now set virtualX, virtualY and displayWidth*/
 
     if (pScrn->display->virtualX >= pScrn->modes->HDisplay &&
         pScrn->display->virtualY >= pScrn->modes->VDisplay) {
@@ -465,7 +465,6 @@ NestedValidateModes(ScrnInfoPtr pScrn) {
         pScrn->virtualX = maxX;
         pScrn->virtualY = maxY;
     }
-    pScrn->virtualFrom = X_DEFAULT;
     pScrn->displayWidth = pScrn->virtualX;
 
     xf86DrvMsg(pScrn->scrnIndex, X_INFO, "Virtual size: %dx%d\n",

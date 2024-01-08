@@ -21,7 +21,8 @@
 # Author: Paulo Zanoni <pzanoni@mandriva.com>
 #
 
-AM_CFLAGS = $(XORG_CFLAGS) $(PCIACCESS_CFLAGS) $(X11_CFLAGS) $(XEXT_CFLAGS)
+AM_CFLAGS = $(BASE_CFLAGS) $(XORG_CFLAGS) $(PCIACCESS_CFLAGS) \
+        $(X11_CFLAGS) $(XEXT_CFLAGS)
 
 nested_drv_la_LTLIBRARIES = nested_drv.la
 nested_drv_la_LDFLAGS = -module -avoid-version

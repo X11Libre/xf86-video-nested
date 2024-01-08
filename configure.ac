@@ -22,7 +22,7 @@
 
 # Initialize Autoconf
 AC_PREREQ([2.60])
-AC_INIT([xf86-video-nestedy],
+AC_INIT([xf86-video-nested],
         [0.1.0],
         [https://gitlab.freedesktop.org/xorg/driver/xf86-video-nested/issues],
         [xf86-video-nested])
@@ -40,8 +40,7 @@ XORG_MACROS_VERSION(1.3)
 XORG_DEFAULT_OPTIONS
 
 # Initialize libtool
-AC_DISABLE_STATIC
-AC_PROG_LIBTOOL
+LT_INIT([disable-static])
 
 # Define a configure option for an alternate module directory
 AC_ARG_WITH(xorg-module-dir, [  --with-xorg-module-dir=DIR ],

@@ -254,8 +254,9 @@ xf86DrvMsg(scrnIndex, X_INFO, "blu_mask: 0x%lx\n", pPriv->img->blue_mask);
     *retGreenMask = pPriv->img->green_mask;
     *retBlueMask = pPriv->img->blue_mask;
 
-    XEvent ev;
     while (1) {
+        XEvent ev;
+
         XNextEvent(pPriv->display, &ev);
         if (ev.type == Expose) {
             break;

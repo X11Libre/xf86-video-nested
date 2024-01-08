@@ -194,8 +194,7 @@ _nested_input_init_buttons(DeviceIntPtr device) {
 
     map = calloc(NUM_MOUSE_BUTTONS, sizeof(CARD8));
 
-    int i;
-    for (i = 0; i < NUM_MOUSE_BUTTONS; i++)
+    for (int i = 0; i < NUM_MOUSE_BUTTONS; i++)
         map[i] = i;
 
     if (!InitButtonClassDeviceStruct(device, NUM_MOUSE_BUTTONS, buttonLabels, map)) {
@@ -218,8 +217,7 @@ _nested_input_init_axes(DeviceIntPtr device) {
         return BadAlloc;
     }
 
-    int i;
-    for (i = 0; i < NUM_MOUSE_AXES; i++) {
+    for (int i = 0; i < NUM_MOUSE_AXES; i++) {
         xf86InitValuatorAxisStruct(device, i, (Atom)0, -1, -1, 1, 1, 1, Absolute);
         xf86InitValuatorDefaults(device, i);
     }

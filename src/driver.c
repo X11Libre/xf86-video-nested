@@ -280,7 +280,7 @@ static Bool NestedAllocatePrivate(ScrnInfoPtr pScrn) {
         return FALSE;
     }
 
-    pScrn->driverPrivate = xnfcalloc(sizeof(NestedPrivate), 1);
+    pScrn->driverPrivate = XNFcallocarray(sizeof(NestedPrivate), 1);
     if (pScrn->driverPrivate == NULL)
         return FALSE;
     return TRUE;
@@ -493,7 +493,7 @@ NestedAddMode(ScrnInfoPtr pScrn, int width, int height) {
     if (snprintf(nameBuf, 64, "%dx%d", width, height) >= 64)
         return FALSE;
 
-    mode = xnfcalloc(sizeof(DisplayModeRec), 1);
+    mode = XNFcallocarray(sizeof(DisplayModeRec), 1);
     mode->status = MODE_OK;
     mode->type = M_T_DRIVER;
     mode->HDisplay = width;

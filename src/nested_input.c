@@ -199,7 +199,7 @@ _nested_input_init_buttons(DeviceIntPtr device) {
 
     if (!InitButtonClassDeviceStruct(device, NUM_MOUSE_BUTTONS, buttonLabels, map)) {
         xf86Msg(X_ERROR, "%s: Failed to register buttons.\n", pInfo->name);
-        
+
         free(map);
         return BadAlloc;
     }
@@ -271,12 +271,12 @@ NestedInputControl(DeviceIntPtr device, int what) {
             break;
         case DEVICE_OFF:
             xf86Msg(X_INFO, "%s: Off.\n", pInfo->name);
-            
+
             if (!device->public.on)
                 break;
-            
+
             xf86RemoveEnabledDevice(pInfo);
-            
+
             pInfo->fd = -1;
             device->public.on = FALSE;
             break;
@@ -311,7 +311,7 @@ NestedInputLoadDriver(NestedClientPrivatePtr clientData) {
     InputOption* options = NULL;
     options = input_option_new(options, strdup("identifier"), strdup("nestedinput"));
     options = input_option_new(options, strdup("driver"), strdup("nestedinput"));
-    
+
     // Invoke NewInputDeviceRequest to call the PreInit function of
     // the driver.
     int ret = NewInputDeviceRequest(options, NULL, &dev);
@@ -333,7 +333,7 @@ NestedInputLoadDriver(NestedClientPrivatePtr clientData) {
     // device back to the input driver when events are being posted.
     NestedClientSetDevicePtr(clientData, dev);
 }
-    
+
 void
 NestedInputPostMouseMotionEvent(DeviceIntPtr dev, int x, int y) {
     xf86PostMotionEvent(dev, TRUE, 0, 2, x, y);

@@ -179,15 +179,15 @@ NestedSetup(pointer module, pointer opts, int *errmaj, int *errmin) {
 
     if (!setupDone) {
         setupDone = TRUE;
-        
+
         xf86AddDriver(&NESTED, module, HaveDriverFuncs);
         xf86AddInputDriver(&NESTEDINPUT, module, 0);
-        
+
         return (pointer)1;
     } else {
         if (errmaj)
             *errmaj = LDR_ONCEONLY;
-        
+
         return NULL;
     }
 }
@@ -316,7 +316,7 @@ static Bool NestedPreInit(ScrnInfoPtr pScrn, int flags) {
 
     if (!xf86SetDepthBpp(pScrn, 0, 0, 0, Support24bppFb | Support32bppFb))
         return FALSE;
- 
+
     xf86PrintDepthBpp(pScrn);
 
     if (pScrn->depth > 8) {
@@ -372,12 +372,6 @@ static Bool NestedPreInit(ScrnInfoPtr pScrn, int flags) {
         return FALSE;
     }
 
-    /*if (pScrn->depth > 1) {
-        Gamma zeros = {0.0, 0.0, 0.0};
-        if (!xf86SetGamma(pScrn, zeros))
-            return FALSE;
-    }*/
-
     if (NestedValidateModes(pScrn) < 1) {
         xf86DrvMsg(pScrn->scrnIndex, X_ERROR, "No valid modes\n");
         return FALSE;
@@ -401,7 +395,7 @@ static Bool NestedPreInit(ScrnInfoPtr pScrn, int flags) {
 
     pScrn->memPhysBase = 0;
     pScrn->fbOffset = 0;
-    
+
     return TRUE;
 }
 
@@ -456,10 +450,10 @@ NestedValidateModes(ScrnInfoPtr pScrn) {
         while (mode != NULL) {
             if (mode->HDisplay > maxX)
                 maxX = mode->HDisplay;
-       
+
             if (mode->VDisplay > maxY)
                 maxY = mode->VDisplay;
-          
+
             mode = mode->next;
         }
         pScrn->virtualX = maxX;
@@ -559,14 +553,8 @@ static Bool NestedScreenInit(SCREEN_INIT_ARGS_DECL)
     xf86DrvMsg(pScrn->scrnIndex, X_INFO, "NestedScreenInit\n");
 
     pNested = PNESTED(pScrn);
-    /*NESTEDScrn = pScrn;*/
 
     NestedPrintPscreen(pScrn);
-
-    /* Save state:
-     * NestedSave(pScrn); */
-    
-    //Load_Nested_Mouse();
 
     pNested->clientData = NestedClientCreateScreen(pScrn->scrnIndex,
                                                    pNested->displayName,
@@ -577,12 +565,12 @@ static Bool NestedScreenInit(SCREEN_INIT_ARGS_DECL)
                                                    pScrn->depth,
                                                    pScrn->bitsPerPixel,
                                                    &redMask, &greenMask, &blueMask);
-    
+
     if (!pNested->clientData) {
         xf86DrvMsg(pScrn->scrnIndex, X_ERROR, "Failed to create client screen\n");
         return FALSE;
     }
-    
+
     // Schedule the NestedInputLoadDriver function to load once the
     // input core is initialized.
     TimerSet(NULL, 0, 1, NestedMouseTimer, pNested->clientData);
@@ -593,7 +581,7 @@ static Bool NestedScreenInit(SCREEN_INIT_ARGS_DECL)
                                   pScrn->rgbBits, pScrn->defaultVisual,
                                   redMask, greenMask, blueMask))
         return FALSE;
-    
+
     if (!miSetPixmapDepths())
         return FALSE;
 
@@ -607,7 +595,7 @@ static Bool NestedScreenInit(SCREEN_INIT_ARGS_DECL)
     xf86SetBlackWhitePixels(pScreen);
     xf86SetBackingStore(pScreen);
     miDCInitialize(pScreen, xf86GetPointerScreenFuncs());
-    
+
     if (!miCreateDefColormap(pScreen))
         return FALSE;
 

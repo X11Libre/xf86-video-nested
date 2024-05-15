@@ -53,7 +53,7 @@ AC_SUBST(moduledir)
 #XORG_DRIVER_CHECK_EXT(RANDR, randrproto)
 
 # Obtain compiler/linker options for the driver dependencies
-PKG_CHECK_MODULES(XORG, xorg-server xproto $REQUIRED_MODULES)
+PKG_CHECK_MODULES(XORG, xorg-server >= 1.18 xproto $REQUIRED_MODULES)
 
 # Checks for libraries.
 PKG_CHECK_MODULES(X11, x11)

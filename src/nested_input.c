@@ -300,38 +300,6 @@ NestedInputReadInput(InputInfoPtr pInfo) {
     TimerSet(NULL, 0, 1, nested_input_ready, pNestedInput->clientData);
 }
 
-#if GET_ABI_MAJOR(ABI_XINPUT_VERSION) < 14
-static InputOption*
-input_option_new(InputOption* list, char *key, char *value)
-{
-    InputOption *tmp;
-
-    tmp = calloc(1, sizeof(*tmp));
-    tmp->key = key;
-    tmp->value = value;
-    tmp->next = list;
-
-    return tmp;
-}
-
-static void
-input_option_free_list(InputOption **list)
-{
-    InputOption *iopts = *list;
-
-    while(iopts)
-    {
-        InputOption *tmp = iopts->next;
-        free(iopts->key);
-        free(iopts->value);
-        free(iopts);
-        iopts = tmp;
-    }
-
-    *list = NULL;
-}
-#endif
-
 
 void
 NestedInputLoadDriver(NestedClientPrivatePtr clientData) {

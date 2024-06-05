@@ -54,6 +54,4 @@
 #define VT_FUNC_ARGS_DECL ScrnInfoPtr arg
 #define VT_FUNC_ARGS(flags) pScrn
 
-#define XF86_ENABLEDISABLEFB_ARG(x) (x)
-
 #endif

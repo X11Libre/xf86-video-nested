@@ -174,19 +174,18 @@ NestedClientCreateScreen(int scrnIndex,
     Bool supported;
     char windowTitle[32];
 
-    pPriv = malloc(sizeof(struct NestedClientPrivate));
+    pPriv = calloc(1, sizeof(struct NestedClientPrivate));
     pPriv->scrnIndex = scrnIndex;
 
     pPriv->display = XOpenDisplay(displayName);
     if (!pPriv->display)
-        return NULL;
+        goto bail;
 
     supported = XkbQueryExtension(pPriv->display, &pPriv->xkb.op, &pPriv->xkb.event,
                                   &pPriv->xkb.error, &pPriv->xkb.major, &pPriv->xkb.minor);
     if (!supported) {
         xf86DrvMsg(pPriv->scrnIndex, X_ERROR, "The remote server does not support the XKEYBOARD extension.\n");
-        XCloseDisplay(pPriv->display);
-        return NULL;
+        goto bail;
     }
 
     pPriv->screenNumber = DefaultScreen(pPriv->display);
@@ -228,14 +227,14 @@ NestedClientCreateScreen(int scrnIndex,
                               0 /* XXX: bytes_per_line */);
 
         if (!pPriv->img)
-            return NULL;
+            goto bail;
 
         pPriv->img->data = malloc(pPriv->img->bytes_per_line * pPriv->img->height);
         pPriv->usingShm = FALSE;
     }
 
     if (!pPriv->img->data)
-        return NULL;
+        goto bail;
 
     NestedClientHideCursor(pPriv); /* Hide cursor */
 
@@ -266,6 +265,15 @@ xf86DrvMsg(scrnIndex, X_INFO, "blu_mask: 0x%lx\n", pPriv->img->blue_mask);
     pPriv->dev = (DeviceIntPtr)NULL;
  
     return pPriv;
+
+  bail:
+    if (pPriv->img)
+        /* XDestroyImage will free(pPriv->img->data) for us */
+        XDestroyImage(pPriv->img);
+    if (pPriv->display)
+        XCloseDisplay(pPriv->display);
+    free(pPriv);
+    return NULL;
 }
 
 void NestedClientHideCursor(NestedClientPrivatePtr pPriv) {

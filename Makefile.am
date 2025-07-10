@@ -21,4 +21,8 @@
 # Author: Paulo Zanoni <pzanoni@mandriva.com>
 #
 
+# During distcheck, system locations (as provided by pkg-config) may
+# not be writable; provide instead relative locations.
+DISTCHECK_CONFIGURE_FLAGS = --with-xorg-module-dir='$${libdir}/xorg/modules'
+
 SUBDIRS = src

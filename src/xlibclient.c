@@ -206,10 +206,10 @@ NestedClientCreateScreen(int scrnIndex,
     snprintf(windowTitle, sizeof(windowTitle), "Screen %d", scrnIndex);
 
     XStoreName(pPriv->display, pPriv->window, windowTitle);
-    
+
     XMapWindow(pPriv->display, pPriv->window);
 
-    XSelectInput(pPriv->display, pPriv->window, ExposureMask | 
+    XSelectInput(pPriv->display, pPriv->window, ExposureMask |
          PointerMotionMask | EnterWindowMask | LeaveWindowMask |
          ButtonPressMask | ButtonReleaseMask | KeyPressMask |
          KeyReleaseMask);
@@ -261,9 +261,9 @@ xf86DrvMsg(scrnIndex, X_INFO, "blu_mask: 0x%lx\n", pPriv->img->blue_mask);
             break;
         }
     }
-   
+
     pPriv->dev = (DeviceIntPtr)NULL;
- 
+
     return pPriv;
 
   bail:
@@ -321,9 +321,9 @@ NestedClientCheckEvents(NestedClientPrivatePtr pPriv) {
             NestedClientUpdateScreen(pPriv,
                                      ((XExposeEvent*)&ev)->x,
                                      ((XExposeEvent*)&ev)->y,
-                                     ((XExposeEvent*)&ev)->x + 
+                                     ((XExposeEvent*)&ev)->x +
                                      ((XExposeEvent*)&ev)->width,
-                                     ((XExposeEvent*)&ev)->y + 
+                                     ((XExposeEvent*)&ev)->y +
                                      ((XExposeEvent*)&ev)->height);
             break;
 

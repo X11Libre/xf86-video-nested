@@ -47,5 +47,5 @@ void
 NestedInputPostMouseMotionEvent(DeviceIntPtr dev, int x, int y);
 void
 NestedInputPostButtonEvent(DeviceIntPtr dev, int button, int isDown);
-void 
+void
 NestedInputPostKeyboardEvent(DeviceIntPtr dev, unsigned int keycode, int isDown);

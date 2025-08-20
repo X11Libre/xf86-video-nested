@@ -222,7 +222,7 @@ _nested_input_init_axes(DeviceIntPtr device) {
         xf86InitValuatorDefaults(device, i);
     }
 
-    return Success; 
+    return Success;
 }
 
 static CARD32
@@ -240,7 +240,7 @@ nested_input_on(OsTimerPtr timer, CARD32 time, pointer arg) {
     return 0;
 }
 
-static int 
+static int
 NestedInputControl(DeviceIntPtr device, int what) {
     int err;
     InputInfoPtr pInfo = device->public.devicePrivate;
@@ -262,7 +262,7 @@ NestedInputControl(DeviceIntPtr device, int what) {
             break;
         case DEVICE_ON:
             xf86Msg(X_INFO, "%s: On.\n", pInfo->name);
-            
+
             if (device->public.on)
                 break;
 
@@ -294,7 +294,7 @@ nested_input_ready(OsTimerPtr timer, CARD32 time, pointer arg) {
     return 0;
 }
 
-static void 
+static void
 NestedInputReadInput(InputInfoPtr pInfo) {
     NestedInputDevicePtr pNestedInput = pInfo->private;
     TimerSet(NULL, 0, 1, nested_input_ready, pNestedInput->clientData);
@@ -307,7 +307,7 @@ NestedInputLoadDriver(NestedClientPrivatePtr clientData) {
     InputInfoPtr pInfo;
     NestedInputDevicePtr pNestedInput;
 
-    // Create input options for our invocation to NewInputDeviceRequest.   
+    // Create input options for our invocation to NewInputDeviceRequest.
     InputOption* options = NULL;
     options = input_option_new(options, strdup("identifier"), strdup("nestedinput"));
     options = input_option_new(options, strdup("driver"), strdup("nestedinput"));

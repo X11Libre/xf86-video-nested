@@ -23,7 +23,7 @@
 # Initialize Autoconf
 AC_PREREQ([2.60])
 AC_INIT([xlibre-xf86-video-nested],
-        [0.1.0],
+        [1.0.1],
         [https://github.com/X11Libre/xf86-video-nested/issues],
         [xlibre-xf86-video-nested])
 AC_CONFIG_SRCDIR([Makefile.am])

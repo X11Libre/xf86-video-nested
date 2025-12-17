@@ -47,9 +47,7 @@
 #include <xf86_OSproc.h>
 #include <xkbsrv.h>
 
-#ifdef HAVE_CONFIG_H
 #include "config.h"
-#endif
 
 #include "client.h"
 #include "nested_input.h"

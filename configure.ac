@@ -62,9 +62,6 @@ PKG_CHECK_MODULES(XORG, xorg-server >= 1.18 xproto $REQUIRED_MODULES)
 PKG_CHECK_MODULES(X11, x11)
 PKG_CHECK_MODULES(XEXT, xext)
 
-DRIVER_NAME=nested
-AC_SUBST([DRIVER_NAME])
-
 AC_CONFIG_FILES([
                 Makefile
                 src/Makefile

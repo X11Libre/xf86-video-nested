@@ -51,10 +51,6 @@ AC_ARG_WITH(xorg-module-dir,
             [moduledir=`$PKG_CONFIG --variable=moduledir xorg-server`])
 AC_SUBST(moduledir)
 
-
-# Store the list of server defined optional extensions in REQUIRED_MODULES
-#XORG_DRIVER_CHECK_EXT(RANDR, randrproto)
-
 # Obtain compiler/linker options for the driver dependencies
 PKG_CHECK_MODULES(XORG, xorg-server >= 1.18 xproto $REQUIRED_MODULES)
 
@@ -62,8 +58,5 @@ PKG_CHECK_MODULES(XORG, xorg-server >= 1.18 xproto $REQUIRED_MODULES)
 PKG_CHECK_MODULES(X11, x11)
 PKG_CHECK_MODULES(XEXT, xext)
 
-AC_CONFIG_FILES([
-                Makefile
-                src/Makefile
-])
+AC_CONFIG_FILES([Makefile src/Makefile])
 AC_OUTPUT

@@ -61,9 +61,7 @@ static MODULESETUPPROTO(NestedSetup);
 static void NestedIdentify(int flags);
 static const OptionInfoRec *NestedAvailableOptions(int chipid, int busid);
 static Bool NestedProbe(DriverPtr drv, int flags);
-static Bool NestedDriverFunc(ScrnInfoPtr pScrn, xorgDriverFuncOp op,
-                             pointer ptr);
-
+static Bool NestedDriverFunc(ScrnInfoPtr pScrn, xorgDriverFuncOp op, void *ptr);
 static Bool NestedPreInit(ScrnInfoPtr pScrn, int flags);
 static Bool NestedScreenInit(ScreenPtr pScreen, int argc, char **argv);
 
@@ -167,10 +165,8 @@ typedef struct NestedPrivate {
 #define PNESTED(p)    ((NestedPrivatePtr)((p)->driverPrivate))
 #define PCLIENTDATA(p) (PNESTED(p)->clientData)
 
-/*static ScrnInfoPtr NESTEDScrn;*/
-
-static pointer
-NestedSetup(pointer module, pointer opts, int *errmaj, int *errmin) {
+static void *
+NestedSetup(void *module, void *opts, int *errmaj, int *errmin) {
     static Bool setupDone = FALSE;
 
     if (!setupDone) {
@@ -179,7 +175,7 @@ NestedSetup(pointer module, pointer opts, int *errmaj, int *errmin) {
         xf86AddDriver(&NESTED, module, HaveDriverFuncs);
         xf86AddInputDriver(&NESTEDINPUT, module, 0);
 
-        return (pointer)1;
+        return (void*)1;
     } else {
         if (errmaj)
             *errmaj = LDR_ONCEONLY;
@@ -250,7 +246,7 @@ NestedProbe(DriverPtr drv, int flags) {
 #endif
 
 static Bool
-NestedDriverFunc(ScrnInfoPtr pScrn, xorgDriverFuncOp op, pointer ptr) {
+NestedDriverFunc(ScrnInfoPtr pScrn, xorgDriverFuncOp op, void *ptr) {
     CARD32 *flag;
     xf86Msg(X_INFO, "NestedDriverFunc\n");
 
@@ -514,7 +510,7 @@ NestedAddMode(ScrnInfoPtr pScrn, int width, int height) {
 // Wrapper for timed call to NestedInputLoadDriver.  Used with timer in order
 // to force the initialization to wait until the input core is initialized.
 static CARD32
-NestedMouseTimer(OsTimerPtr timer, CARD32 time, pointer arg) {
+NestedMouseTimer(OsTimerPtr timer, CARD32 time, void *arg) {
     NestedInputLoadDriver(arg);
     return 0;
 }

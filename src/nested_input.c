@@ -57,10 +57,10 @@
 #define NUM_MOUSE_BUTTONS 6
 #define NUM_MOUSE_AXES 2
 
-static pointer
-NestedInputPlug(pointer module, pointer options, int *errmaj, int  *errmin);
+static void *
+NestedInputPlug(void *module, void *options, int *errmaj, int  *errmin);
 static void
-NestedInputUnplug(pointer p);
+NestedInputUnplug(void *p);
 
 static void
 NestedInputReadInput(InputInfoPtr pInfo);
@@ -121,13 +121,13 @@ void
 NestedInputUnInit(InputDriverPtr drv, InputInfoPtr pInfo, int flags) {
 }
 
-static pointer
-NestedInputPlug(pointer module, pointer options, int *errmaj, int  *errmin) {
+static void *
+NestedInputPlug(void *module, void *options, int *errmaj, int  *errmin) {
     return NULL;
 }
 
 static void
-NestedInputUnplug(pointer p) {
+NestedInputUnplug(void *p) {
 }
 
 static void
@@ -224,7 +224,7 @@ _nested_input_init_axes(DeviceIntPtr device) {
 }
 
 static CARD32
-nested_input_on(OsTimerPtr timer, CARD32 time, pointer arg) {
+nested_input_on(OsTimerPtr timer, CARD32 time, void *arg) {
     DeviceIntPtr device = arg;
     InputInfoPtr pInfo = device->public.devicePrivate;
     NestedInputDevicePtr pNestedInput = pInfo->private;
@@ -286,7 +286,7 @@ NestedInputControl(DeviceIntPtr device, int what) {
 }
 
 static CARD32
-nested_input_ready(OsTimerPtr timer, CARD32 time, pointer arg) {
+nested_input_ready(OsTimerPtr timer, CARD32 time, void *arg) {
     NestedClientPrivatePtr clientData = arg;
     NestedClientCheckEvents(clientData);
     return 0;

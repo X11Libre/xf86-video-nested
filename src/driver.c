@@ -520,22 +520,14 @@ NestedMouseTimer(OsTimerPtr timer, CARD32 time, pointer arg) {
 }
 
 static void
-#if ABI_VIDEODRV_VERSION >= SET_ABI_VERSION(23, 0)
 NestedBlockHandler(void *data, void *wt)
-#else
-NestedBlockHandler(pointer data, OSTimePtr wt, pointer LastSelectMask)
-#endif
 {
     NestedClientPrivatePtr pNestedClient = data;
     NestedClientCheckEvents(pNestedClient);
 }
 
 static void
-#if ABI_VIDEODRV_VERSION >= SET_ABI_VERSION(23, 0)
 NestedWakeupHandler(void *data, int i)
-#else
-NestedWakeupHandler(pointer data, int i, pointer LastSelectMask)
-#endif
 {
 }
 

@@ -672,6 +672,7 @@ static void NestedLeaveVT(ScrnInfoPtr pScrn) {
 
 static void NestedFreeScreen(ScrnInfoPtr pScrn) {
     xf86DrvMsg(pScrn->scrnIndex, X_INFO, "NestedFreeScreen\n");
+    NestedFreePrivate(pScrn);
 }
 
 static ModeStatus NestedValidMode(ScrnInfoPtr pScrn, DisplayModePtr mode,

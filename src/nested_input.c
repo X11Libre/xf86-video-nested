@@ -57,11 +57,6 @@
 #define NUM_MOUSE_BUTTONS 6
 #define NUM_MOUSE_AXES 2
 
-static void *
-NestedInputPlug(void *module, void *options, int *errmaj, int  *errmin);
-static void
-NestedInputUnplug(void *p);
-
 static void
 NestedInputReadInput(InputInfoPtr pInfo);
 static int
@@ -78,26 +73,6 @@ typedef struct _NestedInputDeviceRec {
     NestedClientPrivatePtr clientData;
     int   version;
 } NestedInputDeviceRec, *NestedInputDevicePtr;
-
-static XF86ModuleVersionInfo NestedInputVersionRec = {
-    "nestedinput",
-    MODULEVENDORSTRING,
-    MODINFOSTRING1,
-    MODINFOSTRING2,
-    XORG_VERSION_CURRENT,
-    PACKAGE_VERSION_MAJOR, PACKAGE_VERSION_MINOR,
-    PACKAGE_VERSION_PATCHLEVEL,
-    ABI_CLASS_XINPUT,
-    ABI_XINPUT_VERSION,
-    MOD_CLASS_XINPUT,
-    {0, 0, 0, 0}
-};
-
-_X_EXPORT XF86ModuleData nestedInputModuleData = {
-    &NestedInputVersionRec,
-    &NestedInputPlug,
-    &NestedInputUnplug
-};
 
 int
 NestedInputPreInit(InputDriverPtr drv, InputInfoPtr pInfo, int flags) {
@@ -119,15 +94,6 @@ NestedInputPreInit(InputDriverPtr drv, InputInfoPtr pInfo, int flags) {
 
 void
 NestedInputUnInit(InputDriverPtr drv, InputInfoPtr pInfo, int flags) {
-}
-
-static void *
-NestedInputPlug(void *module, void *options, int *errmaj, int  *errmin) {
-    return NULL;
-}
-
-static void
-NestedInputUnplug(void *p) {
 }
 
 static void

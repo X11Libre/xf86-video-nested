@@ -205,12 +205,12 @@ NestedClientCreateScreen(int scrnIndex,
 
     XStoreName(pPriv->display, pPriv->window, windowTitle);
 
-    XMapWindow(pPriv->display, pPriv->window);
-
     XSelectInput(pPriv->display, pPriv->window, ExposureMask |
          PointerMotionMask | EnterWindowMask | LeaveWindowMask |
          ButtonPressMask | ButtonReleaseMask | KeyPressMask |
          KeyReleaseMask);
+
+    XMapWindow(pPriv->display, pPriv->window);
 
     if (!NestedClientTryXShm(pPriv, scrnIndex, width, height, depth)) {
         pPriv->img = XCreateImage(pPriv->display,

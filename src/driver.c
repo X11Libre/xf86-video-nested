@@ -54,6 +54,7 @@
 #define NESTED_MAJOR_VERSION PACKAGE_VERSION_MAJOR
 #define NESTED_MINOR_VERSION PACKAGE_VERSION_MINOR
 #define NESTED_PATCHLEVEL PACKAGE_VERSION_PATCHLEVEL
+#define NESTED_VERSION_SUFFIX PACKAGE_VERSION_SUFFIX
 
 #define TIMER_CALLBACK_INTERVAL 20
 
@@ -150,6 +151,9 @@ _X_EXPORT XF86ModuleData nestedModuleData = {
     NestedSetup,
     NULL, /* teardown */
 };
+#ifdef XF86_MODULE_VERSION_SUFFIX
+XF86_MODULE_VERSION_SUFFIX(nested, NESTED_VERSION_SUFFIX);
+#endif
 
 /* These stuff should be valid to all server generations */
 typedef struct NestedPrivate {
